@@ -1,0 +1,27 @@
+/* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
+.button{
+    -fx-background-color: linear-gradient(#FCD553, #EBA328);
+	-fx-text-fill: rgb(0,0,0)
+}
+
+.button:hover {
+	-fx-background-color: linear-gradient(#F5CB4E, #FCD553);
+}
+
+.label{
+	-fx-text-fill: rgb(0,0,0)
+}
+
+.check-box{
+	-fx-text-fill: rgb(0,0,0)
+}
+
+.combo-box{
+	-fx-background-color: linear-gradient(#FCD553, #EBA328) ;
+	-fx-text-fill: rgb(0,0,0)
+}
+
+.root{
+	-fx-background-image: url(background.jpg) ;
+	-fx-background-size:cover
+}

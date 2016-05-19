@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<highScores xmlns="hu.unideb.inf.lali123.model">
+    <highScore>
+        <date>2016-05-19 12:14</date>
+        <name>Computer</name>
+        <score>11500</score>
+    </highScore>
+    <highScore>
+        <date>2016-05-13 00:01</date>
+        <name>Lali</name>
+        <score>15500</score>
+    </highScore>
+    <highScore>
+        <date>2016-05-14 21:01</date>
+        <name>Eszter</name>
+        <score>12500</score>
+    </highScore>
+    <highScore>
+        <date>2016-05-15 22:12</date>
+        <name>Tibor</name>
+        <score>13500</score>
+    </highScore>
+    <highScore>
+        <date>2016-05-15 20:42</date>
+        <name>Lali</name>
+        <score>11400</score>
+    </highScore> 
+    <highScore>
+        <date>2016-05-16 21:08</date>
+        <name>Lali</name>
+        <score>10500</score>
+    </highScore>
+    <highScore>
+        <date>2016-05-10 11:32</date>
+        <name>Janos</name>
+        <score>10000</score>
+    </highScore> 
+    <highScore>
+        <date>2016-05-16 13:28</date>
+        <name>Lali</name>
+        <score>10000</score>
+    </highScore>
+</highScores>

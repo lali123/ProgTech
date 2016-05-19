@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.shape.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<AnchorPane maxHeight="650.0" maxWidth="675.0" minHeight="650.0" minWidth="675.0" prefHeight="675.0" prefWidth="675.0" style="-fx-background-color: white; -fx-border-color: red;" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.lali123.controller.BoardController">
+	<children>
+		<BorderPane fx:id="root">
+			<center>
+				<GridPane fx:id="gridPane" BorderPane.alignment="CENTER">
+					<BorderPane.margin>
+						<Insets left="50.0" right="50.0" top="75.0" />
+					</BorderPane.margin>
+				</GridPane>
+			</center>
+			<top>
+				<GridPane BorderPane.alignment="CENTER">
+					<columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+						<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+					</columnConstraints>
+					<rowConstraints>
+						<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+					</rowConstraints>
+					<children>
+						<Label text=":" GridPane.columnIndex="3" GridPane.halignment="CENTER" />
+						<Label fx:id="p1NameLabel" contentDisplay="RIGHT" text="Player1" GridPane.columnIndex="1" GridPane.halignment="RIGHT" />
+						<Label fx:id="p2NameLabel" text="Player2" GridPane.columnIndex="5" GridPane.halignment="LEFT" />
+						<Label fx:id="p1Score" text="0" GridPane.columnIndex="2" GridPane.halignment="RIGHT" />
+						<Label fx:id="p2Score" text="0" GridPane.columnIndex="4" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToMenu" prefHeight="23.0" prefWidth="99.0" text="Back" />
+					</children>
+				</GridPane>
+			</top>
+		</BorderPane>
+	</children>
+</AnchorPane>

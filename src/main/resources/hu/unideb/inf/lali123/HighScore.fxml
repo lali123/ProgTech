@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="348.0" minWidth="200.0" prefHeight="348.0" prefWidth="281.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hu.unideb.inf.lali123.controller.HighScoreController">
+   <children>
+      <ListView fx:id="highScoreList" layoutX="15.0" layoutY="14.0" prefHeight="275.0" prefWidth="171.0" visible="false" />
+      <Button fx:id="backButton" layoutX="120.0" layoutY="301.0" mnemonicParsing="false" onAction="#backToMenu" text="Back" />
+      <TableView fx:id="highScoreTable" layoutX="10.0" layoutY="10.0" prefHeight="275.0" prefWidth="262.0"/>
+   </children>
+</AnchorPane>
