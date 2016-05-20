@@ -1,7 +1,14 @@
 package hu.unideb.inf.lali123.model;
 
+import hu.unideb.inf.lali123.Main;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
+ * This class for game board.
+ * 
  * @author Lajos
  *
  */
@@ -11,6 +18,13 @@ public class Board{
     private int supportedPlayer;
 
     /**
+     * Logger for logging.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
+    /**
+     * Constructor of Board class.
+     * 
      * @param rOW
      * @param cOLUMN
      */
@@ -20,18 +34,23 @@ public class Board{
         COLUMN = cOLUMN;
         this.table = new int[COLUMN][ROW];
         supportedPlayer = 1;
+        logger.info("Board created.");
     }
     
     /**
+     * Check a disk can fit in the given column.
+     * 
      * @param column
-     * @return
+     * @return boolean.
      */
     public boolean applicable(int column) {
         return table[column][0] == 0;
     }
 
     /**
-     * @return
+     * Check is there a winner
+     * 
+     * @return 0 - no winner, 1 - 1.player, 2 - 2.player, 3 - draw game.
      */
     public int checkWinner() {
 
@@ -94,13 +113,16 @@ public class Board{
     }
     
     /**
-     * 
+     * Make empty the game table.
      */
     public void emptyTable() {
+        logger.info("Initialize board.");
         table = new int[COLUMN][ROW];
     }
 
     /**
+     * Get table number of columns.
+     * 
      * @return
      */
     public int getCOLUMN() {
@@ -108,6 +130,8 @@ public class Board{
     }
 
     /**
+     * Get table number of rows.
+     * 
      * @return
      */
     public int getROW() {
@@ -115,6 +139,8 @@ public class Board{
     }
 
     /**
+     * Get which player turn.
+     * 
      * @return
      */
     public int getSupportedPlayer() {
@@ -122,6 +148,8 @@ public class Board{
     }
 
     /**
+     * Get the whole table with the current state.
+     * 
      * @return
      */
     public int[][] getTable() {
@@ -144,8 +172,10 @@ public class Board{
 
 
     /**
+     * Check is the column full.
+     * 
      * @param column
-     * @return
+     * @return boolean.
      */
     public boolean isColumnFull(int column) {
         int count = 0;
@@ -161,18 +191,23 @@ public class Board{
     }
 
     /**
+     * Check has the game  ended.
+     * 
      * @return
      */
     public boolean isEndGame() {
         if (checkWinner() == 0) {
             return false;
         } else {
+            if (!Options.getInstance().isComputerOpponent()) {
+                logger.info("Game ended.");
+            }
             return true;
         }
     }
 
     /**
-     * 
+     * Print out the game table.
      */
     public void printTable() {
 
@@ -192,6 +227,8 @@ public class Board{
     }
 
     /**
+     * Set the number of columns.
+     * 
      * @param cOLUMN
      */
     public void setCOLUMN(int cOLUMN) {
@@ -199,6 +236,8 @@ public class Board{
     }
 
     /**
+     * Set the number of rows.
+     * 
      * @param rOW
      */
     public void setROW(int rOW) {
@@ -206,6 +245,8 @@ public class Board{
     }
 
     /**
+     * Set the table.
+     * 
      * @param table
      */
     public void setTable(int[][] table) {
@@ -213,10 +254,15 @@ public class Board{
     }
 
     /**
-     * @param column
-     * @param player
+     * Take a disk to a specified column.
+     * 
+     * @param column specified column.
+     * @param player supported player.
      */
     public void takeDisk(int column, int player) {
+        if (!Options.getInstance().isComputerOpponent()) {
+            logger.info("Take disk to " + column);            
+        }
         int rows = ROW;
         for (int i = rows - 1; i >= 0; i--) {
             if (table[column][i] != 1 && table[column][i] != 2) {
@@ -228,6 +274,8 @@ public class Board{
     }
 
     /**
+     * Undo last in a given column.
+     * 
      * @param column
      */
     public void undoMove(int column) {
@@ -238,6 +286,4 @@ public class Board{
             }
         }
     }
-    
-    
 }

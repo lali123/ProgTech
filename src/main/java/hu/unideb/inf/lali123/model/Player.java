@@ -1,5 +1,10 @@
 package hu.unideb.inf.lali123.model;
 
+import hu.unideb.inf.lali123.Main;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javafx.scene.paint.Color;
 
 /**
@@ -11,6 +16,10 @@ public class Player {
     private Color color;
     private boolean isCurrent;
     private int score;
+    /**
+     * Logger for logging.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     /**
      * @param name
@@ -24,12 +33,14 @@ public class Player {
         this.color = color;
         this.isCurrent = isCurrent;
         this.score = score;
+        logger.info(name + " Player created");
     }
 
     /**
      * 
      */
     public void addScore(){
+        logger.info("Add score to " + name);
         score++;
     }
     

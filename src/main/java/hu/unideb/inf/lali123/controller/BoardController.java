@@ -1,5 +1,6 @@
 package hu.unideb.inf.lali123.controller;
 
+import hu.unideb.inf.lali123.Main;
 import hu.unideb.inf.lali123.model.AI;
 import hu.unideb.inf.lali123.model.Board;
 import hu.unideb.inf.lali123.model.Disc;
@@ -10,6 +11,9 @@ import hu.unideb.inf.lali123.model.Player;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleObjectProperty;
@@ -40,6 +44,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 /**
+ * This class implements the game logic. It controls the game.
+ * 
  * @author Lajos
  *
  */
@@ -53,22 +59,34 @@ public class BoardController implements Initializable {
     @FXML
     Button backButton;
 
+    /**
+     * Logger for logging.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
     private SimpleObjectProperty<Color> playerColorProperty;
     private Game ConnectFourGame;
     private Player player1, player2;
     private AI ConnectFourAI;
 
     /**
+     * 
+     * 
      * @param event
      * @throws IOException
      */
     @FXML
-    private void backToMenu(ActionEvent event) throws IOException {
+    private void backToMenu(ActionEvent event) {
         Stage stage;
-        Parent root;
+        Parent root = null;
 
-        root = FXMLLoader.load(getClass().getResource(
-                "/hu/unideb/inf/lali123/Menu.fxml"));
+        try {
+            root = FXMLLoader.load(getClass().getResource(
+                    "/hu/unideb/inf/lali123/Menu.fxml"));
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            logger.error("IO Exception during load Menu.fxml.");
+        }
         stage = (Stage) backButton.getScene().getWindow();
         Scene scene = new Scene(root);
         stage.setScene(scene);
@@ -77,8 +95,9 @@ public class BoardController implements Initializable {
 
     }
 
-    // throw a disk to table programmatically
     /**
+     * Throw a disk to table programmatically with given column and row.
+     * 
      * @param column
      * @param row
      */
@@ -107,11 +126,12 @@ public class BoardController implements Initializable {
         ;
     }
 
-    // Create the GAME table
     /**
+     * Create the GUI of the GAME table.
      * @param gridPane
      */
     private void createGrids(GridPane gridPane) {
+        logger.debug("Creating grid...");
         gridPane.getChildren().clear();
 
         for (int row = 0; row < gridPane.getRowConstraints().size(); row++) {
@@ -143,11 +163,12 @@ public class BoardController implements Initializable {
                 gridPane.add(stack, column, row);
             }
         }
-
+        logger.debug("Grid created.");
     }
 
-    // display on disc throwing on GUI
     /**
+     * Display on disc throwing on GUI and control the evaluating.
+     * 
      * @param translateTranstion
      * @param disk
      */
@@ -173,6 +194,7 @@ public class BoardController implements Initializable {
                         evaluateResult(winner);                        
                     }else {
                         buttonPressing(col, row);  
+                        winner = ConnectFourGame.getTable().checkWinner();
                         evaluateResult(winner);                       
                     }
                 }
@@ -193,20 +215,24 @@ public class BoardController implements Initializable {
         }
     }
 
-    // Check who is the winner.
     /**
+     * Check who is the winner.
+     * 
      * @param checkWinner
      */
     private void evaluateResult(int checkWinner) {
         switch (checkWinner) {
         case 1:
             showResult(ConnectFourGame.getPlayer1());
+            logger.info(ConnectFourGame.getPlayer1().getName() + " wins.");
             break;
         case 2:
             showResult(ConnectFourGame.getPlayer2());
+            logger.info(ConnectFourGame.getPlayer2().getName() + " wins.");
             break;
         case 3:
             showResult(new Player("Drawn Game", Color.WHITE, false, 0));
+            logger.info("Drawn game.");
             break;
         default:
             break;
@@ -214,7 +240,7 @@ public class BoardController implements Initializable {
     }
 
     /*
-     * (non-Javadoc)
+     * Initialize the GUI.
      * 
      * @see javafx.fxml.Initializable#initialize(java.net.URL,
      * java.util.ResourceBundle)
@@ -256,22 +282,30 @@ public class BoardController implements Initializable {
     }
 
     /**
+     * Set the round player score.
+     * 
      * @param winner
      */
     private void setPlayerScores(Player winner) {
         if (winner.equals(ConnectFourGame.getPlayer1())) {
             ConnectFourGame.getPlayer1().addScore();
             p1Score.setText(ConnectFourGame.getPlayer1().getScore() + "");
+            logger.debug("Set player1 score.");
         } else {
             ConnectFourGame.getPlayer2().addScore();
             p2Score.setText(ConnectFourGame.getPlayer2().getScore() + "");
+            logger.debug("Set player2 score.");
         }
 
         ConnectFourGame.getTable().emptyTable();
+        playerColorProperty = new SimpleObjectProperty<Color>(
+                player1.getColor());
         createGrids(gridPane);
     }
 
     /**
+     * Show result of the game. Load GameResult.fxml.
+     * 
      * @param winner
      */
     public void showResult(Player winner) {
@@ -294,7 +328,7 @@ public class BoardController implements Initializable {
                 setPlayerScores(winner);
             });
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error("IO Exception during loading GameResult.fxml.");
         }
     }
 }

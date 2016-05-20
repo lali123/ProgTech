@@ -1,6 +1,13 @@
 package hu.unideb.inf.lali123.model;
 
+import hu.unideb.inf.lali123.Main;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
+ * This class is for offering a step for computer.
+ * 
  * @author Lajos
  *
  */
@@ -9,28 +16,39 @@ public class AI {
     private int supportedPlayer;
 
     /**
-     * 
+     * Logger for logging.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+    
+    /**
+     * Constructor of AI.
      */
     public AI() {
         heuristic = new Heuristic();
         supportedPlayer = 2;
+        logger.info("AI created.");
     }
 
     /**
+     * Get the MiniMax step.
+     * 
      * @param board
      * @param player
-     * @return
+     * @return Number between 0-6.
      */
     public int getAIMove(Board board, int player) {
+        logger.info("Get MiniMax step");
         return minimaxStep(board, 5, heuristic, player);
     }
 
     /**
+     * Minimax algorithm.
+     * 
      * @param state
      * @param limit
      * @param heur
      * @param turn
-     * @return
+     * @return Number between 0-6.
      */
     private int minimaxStep(Board state, int limit, Heuristic heur, int turn) {
         int max = Integer.MIN_VALUE;
@@ -51,6 +69,8 @@ public class AI {
     }
 
     /**
+     * Minimax value.
+     * 
      * @param state
      * @param limit
      * @param heur

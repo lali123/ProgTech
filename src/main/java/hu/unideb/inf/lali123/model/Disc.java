@@ -3,6 +3,8 @@ package hu.unideb.inf.lali123.model;
 import javafx.scene.shape.Circle;
 
 /**
+ * This class extends the Circle class with 2 field: column, row.
+ * 
  * @author Lajos
  *
  */
@@ -10,6 +12,8 @@ public class Disc extends Circle {
     private int column, row;
 
     /**
+     * Construct the Disc.
+     * 
      * @param radius
      * @param column
      * @param row
@@ -21,6 +25,8 @@ public class Disc extends Circle {
     }
 
     /**
+     * Get the column of the disk.
+     * 
      * @return
      */
     public int getcolumn() {
@@ -28,6 +34,8 @@ public class Disc extends Circle {
     }
 
     /**
+     * Get the row of the disk.
+     * 
      * @return
      */
     public int getRow() {
@@ -35,6 +43,8 @@ public class Disc extends Circle {
     }
 
     /**
+     * Set the column of the disk.
+     * 
      * @param column
      */
     public void setcolumn(int column) {
@@ -42,6 +52,8 @@ public class Disc extends Circle {
     }
 
     /**
+     * Set the row of the disk.
+     * 
      * @param row
      */
     public void setRow(int row) {

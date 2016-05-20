@@ -46,9 +46,15 @@ public class OptionsController implements Initializable{
         
         computerOpponent.setOnAction(e->{
             if (computerOpponent.isSelected()) {
+                Options.getInstance().setComputerOpponent(true);
+                player2Name.setText("Computer");
+                player2Name.setDisable(true);
                 easyOpponent.setDisable(false);
                 hardOpponent.setDisable(false);
             }else {
+                Options.getInstance().setComputerOpponent(false);
+                player2Name.setText("Player2");
+                player2Name.setDisable(false);
                 easyOpponent.setDisable(true);
                 hardOpponent.setDisable(true);                
             }

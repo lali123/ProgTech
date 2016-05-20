@@ -1,5 +1,7 @@
 package hu.unideb.inf.lali123.model;
 
+import hu.unideb.inf.lali123.Main;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,8 +15,27 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * This class implements the HighScoreDAO interface.
+ * 
+ * Read and write to HighScore.xml file.
+ * 
+ * @author Lajos
+ *
+ */
 public class HighScoreDAOIml implements HighScoreDAO {
 
+    /**
+     * Logger for logging.
+     */
+    private static Logger logger = LoggerFactory.getLogger(Main.class);
+
+    /* (non-Javadoc)
+     * @see hu.unideb.inf.lali123.model.HighScoreDAO#addHighScore(hu.unideb.inf.lali123.model.HighScore)
+     */
     @Override
     public void addHighScore(HighScore highScore) {
 
@@ -33,32 +54,33 @@ public class HighScoreDAOIml implements HighScoreDAO {
                     Boolean.TRUE);
 
             URL resourceUrl = getClass().getResource("HighScores.xml");
-            
+
             File file = new File(resourceUrl.toURI());
             OutputStream XMLfile = new FileOutputStream(file);
             System.out.println(XMLfile);
             jaxbMarshaller.marshal(highScores, XMLfile);
-            jaxbMarshaller.marshal(highScores, System.out);
             XMLfile.close();
-
+            logger.info("Add new HighScore " + highScore.getName());
         } catch (JAXBException e) {
-            // some exception occured
-            e.printStackTrace();
+            logger.error("JAXB Exception during marshalling.");
+            // e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IO Exception during marshalling.");
+            // e.printStackTrace();
         } catch (URISyntaxException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("URI Syntax Exception during marshalling.");
+            // e.printStackTrace();
         }
     }
 
+    /* (non-Javadoc)
+     * @see hu.unideb.inf.lali123.model.HighScoreDAO#getAllHighScores()
+     */
     @Override
     public HighScores getAllHighScores() {
         HighScores highScores = new HighScores();
 
         try {
-
             // create JAXB context and initializing Marshaller
             JAXBContext jaxbContext = JAXBContext.newInstance(HighScores.class);
 
@@ -71,14 +93,13 @@ public class HighScoreDAOIml implements HighScoreDAO {
             XMLfile.close();
 
         } catch (JAXBException e) {
-            // some exception occured
-            e.printStackTrace();
+            logger.error("JAXB Exception during unmarshalling.");
+            // e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            logger.error("IO Exception during unmarshalling.");
+            // e.printStackTrace();
         }
 
         return highScores;
     }
-
 }
